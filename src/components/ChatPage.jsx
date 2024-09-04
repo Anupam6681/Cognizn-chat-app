@@ -70,7 +70,7 @@ const ChatPage = ({ group, onBack, username }) => {
           }
         `}
       </style>
-      <div className="flex flex-col h-screen bg-chat" style={{ width: '100%' }}>
+      <div className="flex flex-col h-screen bg-chat" style={{ width: '100%' ,background:"#eff6ff"}} >
         <header className="text-white p-4 flex items-center rounded-b-lg shadow-lg" style={{ background: "#6fa1ffe3" }}>
           <button
             className="p-2 rounded-full hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-300 transition-transform duration-150 ease-in-out transform hover:scale-105"
@@ -103,6 +103,7 @@ const ChatPage = ({ group, onBack, username }) => {
                       src={message.profileImageUrl || "https://via.placeholder.com/50"}
                       alt={message.username}
                       className="w-10 h-10 rounded-full mr-3"
+                      style={{background:"darkgray",maxWidth:"39px",maxHeight:"39px"}}
                     />
                     <div className="max-w-xs p-3 bg-white rounded-lg shadow text-left overflow-hidden">
                       <strong className="block mb-1 text-sm font-medium truncate">{message.username}</strong>

@@ -68,7 +68,7 @@ const GroupList = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-100">
+    <div className="min-h-screen flex flex-col items-center " style={{background:"#eff6ff"}}>
       {showChat ? (
         <ChatPage 
           group={selectedGroup} 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios'; 
 import { useNavigate } from 'react-router-dom';
-import 'daisyui/dist/full.css'; // Import DaisyUI styles
-import { FaUser, FaLock } from 'react-icons/fa'; // Import icons for username and password fields
-import logo from '../assets/logo.jpg'; // Adjust the path based on your directory structure
+import 'daisyui/dist/full.css'; 
+import { FaUser, FaLock } from 'react-icons/fa'; 
+import logo from '../assets/Cognizn_logo.webp'; 
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -15,18 +15,18 @@ const Login = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
     try {
       const response = await axios.post('http://localhost:3000/api/chat/login', {
         username,
         password,
       });
-
+  
       if (response.status === 200) {
-        onLogin(response.data.token);
-        const { userid } = response.data;
-
+        const { token, userid } = response.data;
+        localStorage.setItem('authToken', token);
         localStorage.setItem('userid', userid);
+        onLogin(token);
         navigate('/dashboard');
       } else {
         setError(response.data.message || 'Login failed');
@@ -37,21 +37,21 @@ const Login = ({ onLogin }) => {
       setLoading(false);
     }
   };
-
+  
   return (
-    <div className="flex flex-col h-screen bg-gray-100 justify-center items-center p-4">
-      <div className="w-full max-w-md bg-white shadow-2xl rounded-lg p-8">
+    <div className="flex flex-col h-screen bg-gradient-to-br from-blue-50 to-purple-50 justify-center items-center p-6">
+      <div className="w-full max-w-md bg-white shadow-2xl rounded-lg p-8 border border-gray-300">
         <div className="flex justify-center mb-8">
           <img
             src={logo}
             alt="Logo"
-            className="w-32 h-auto rounded-full shadow-md"
+            className="w-32 h-auto rounded-full shadow-lg"
           />
         </div>
         <h2 className="text-3xl font-bold mb-6 text-center text-gray-900">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="flex flex-col space-y-4">
-            <label className="flex items-center border border-gray-300 rounded-lg bg-gray-50 p-3">
+            <label className="flex items-center border border-gray-300 rounded-lg bg-gray-100 p-3">
               <FaUser className="text-gray-600 mr-3" size={24} />
               <input
                 type="text"
@@ -62,7 +62,7 @@ const Login = ({ onLogin }) => {
                 required
               />
             </label>
-            <label className="flex items-center border border-gray-300 rounded-lg bg-gray-50 p-3">
+            <label className="flex items-center border border-gray-300 rounded-lg bg-gray-100 p-3">
               <FaLock className="text-gray-600 mr-3" size={24} />
               <input
                 type="password"

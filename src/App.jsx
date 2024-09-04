@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Login from "./components/Login"; // Adjust the path as necessary
 import GroupList from "./components/GroupList"; // Add this import if it's in your project
 
@@ -15,13 +10,14 @@ const App = () => {
     const checkAuthentication = () => {
       const token = localStorage.getItem("authToken");
       if (token) {
+        // Optionally, verify the token with your backend or decode it to check validity
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);
       }
     };
 
-    // Check authentication status on initial load and whenever the component is rendered
+    // Check authentication status on initial load
     checkAuthentication();
   }, []);
 
